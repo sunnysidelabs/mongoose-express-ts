@@ -1,0 +1,25 @@
+### Variables
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1Y2Q2ODMxZjFhY2I0ZjBiNjkxYzRlZjYiLCJpYXQiOjE1NTc1NjIxNDMsImV4cCI6MTU1NzkyMjE0M30.BP7n27AVY9MKTz1ViHMJWOVqQGMktJmT8AJWrZuQoP0
+@profile = { "firstName": "John", "lastName": "Doe", "username": "john.doe" }
+@userId = 5cd6831f1acb4f0b691c4ef6
+
+### Get current user's profile
+GET  http://localhost:5000/api/profile/me
+x-auth-token: {{token}}
+
+### Create or update user's profile
+POST  http://localhost:5000/api/profile
+x-auth-token: {{token}}
+content-type: application/json
+
+{{profile}}
+
+### Get all profiles
+GET  http://localhost:5000/api/profile
+
+### Get profile by userId
+GET  http://localhost:5000/api/profile/user/{{userId}}
+
+### Delete profile and user
+DELETE  http://localhost:5000/api/profile
+x-auth-token: {{token}}
