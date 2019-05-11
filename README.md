@@ -6,7 +6,7 @@ The main purpose of this repository is to show a good end-to-end project setup a
 
 This example comes with a complete REST API to handle Authentication and CRUD features on Users and their corresponding Profile. You may view the API documentation on the [Wiki](https://github.com/polcham/mongoose-express-ts/wiki).  
 
-# Pre-reqs
+# Prerequisites
 
 To build and run this app locally you will need a few things:
 
