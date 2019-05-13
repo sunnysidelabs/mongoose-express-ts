@@ -6,6 +6,10 @@ The main purpose of this repository is to show a good end-to-end project setup a
 
 This example comes with a complete REST API to handle Authentication and CRUD features on Users and their corresponding Profile. You may view the API documentation on the [Wiki](https://github.com/polcham/mongoose-express-ts/wiki).  
 
+# Why TypeScript?
+
+While it's true that developing applications on an Untyped language such as JavaScript, is easier to learn and is faster to develop, it will undeniably get harder and harder to grasp as the application grows in scale. This in turn, consumes more development hours and leads to alot of run-time errors, as the team gets accustomed to the growing codebase. And this, is what this boilerplate, based on TypeScript, hopes to achieve. By using the TypeScript standard, you'll have better team and code stability with "interface oriented development", leading to better standardized codes. TypeScript allows developers to focus more on exposed Interfaces or API, rather than having to know all the code by heart. This makes the codebase easier to maintain with big teams, especially if those teams are composed of developers of different skill levels. 
+
 # Prerequisites
 
 To build and run this app locally you will need a few things:
