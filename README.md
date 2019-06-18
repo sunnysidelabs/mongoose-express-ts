@@ -4,11 +4,11 @@
 
 The main purpose of this repository is to show a good end-to-end project setup and workflow for writing a Mongoose Node.js Express code in TypeScript complete with middleware, models, routes, and types.
 
-This example comes with a complete REST API to handle Authentication and CRUD features on Users and their corresponding Profile. You may view the API documentation on the [Wiki](https://github.com/polcham/mongoose-express-ts/wiki).  
+This example comes with a complete REST API to handle Authentication and CRUD features on Users and their corresponding Profile. You may view the API documentation on the [Wiki](https://github.com/polcham/mongoose-express-ts/wiki).
 
 # Why TypeScript?
 
-While it's true that developing applications on an Untyped language such as **JavaScript**, is easier to learn and is faster to develop, it will undeniably get harder and harder to grasp as the application grows in scale. This in turn, leads to more run-time errors consuming more development hours, as the team gets accustomed to the growing codebase. And this is what this boilerplate hopes to achieve. By using the **TypeScript** standard, you'll have better team and code stability with **Interface Oriented Development**, leading to better standardized codes. TypeScript allows developers to focus more on exposed Interfaces or API, rather than having to know all the code by heart. This makes the codebase easier to maintain with big teams, especially if those teams are composed of developers of different skill levels. 
+While it's true that developing applications on an Untyped language such as **JavaScript**, is easier to learn and is faster to develop, it will undeniably get harder and harder to grasp as the application grows in scale. This in turn, leads to more run-time errors consuming more development hours, as the team gets accustomed to the growing codebase. And this is what this boilerplate hopes to achieve. By using the **TypeScript** standard, you'll have better team and code stability with **Interface Oriented Development**, leading to better standardized codes. TypeScript allows developers to focus more on exposed Interfaces or API, rather than having to know all the code by heart. This makes the codebase easier to maintain with big teams, especially if those teams are composed of developers of different skill levels.
 
 # Prerequisites
 
@@ -30,6 +30,7 @@ git clone --depth=1 https://github.com/polcham/mongoose-express-ts.git <project_
 ```
 cd <project_name>
 npm install
+npm run tsc
 ```
 
 - Build and run the project with auto reload (nodemon)

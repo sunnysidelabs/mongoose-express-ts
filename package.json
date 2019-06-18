@@ -10,7 +10,8 @@
     "deploy": "node dist/src/server.js",
     "watch-deploy": "nodemon dist/src/server.js",
     "server": "concurrently \"npm run watch-tsc\" \"npm run watch-deploy\"",
-    "start": "concurrently \"npm run tsc\" \"npm run deploy\""
+    "start": "npm run deploy",
+    "heroku-postbuild": "npm run tsc"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
