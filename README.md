@@ -139,7 +139,7 @@ Since we're developing with TypeScript, it is important for the codes to be tran
 
 ### VSCode Extensions
 
-To enhance your development experience while working in VSCode, I provided you a list of the suggested extensions for working with this project:
+To enhance your development experience while working in VSCode, I provided you with a list of suggested extensions while working on this project:
 
 - [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
 - [Version Lens](https://marketplace.visualstudio.com/items?itemName=pflannery.vscode-versionlens)
