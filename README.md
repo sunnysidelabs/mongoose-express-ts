@@ -66,7 +66,7 @@ The full folder structure of this app is explained below:
 | **src/models**     | Models define Mongoose schemas that will be used in storing and retrieving data from MongoDB                                                                  |
 | **src/routes**     | Routes define the endpoints of your API                                                                                                                       |
 | **src/types**      | Contains all your custom types to better handle type checking with TypeScript                                                                                 |
-| **src**/server.ts  | Entry point to your express app                                                                                                                               |
+| **src/server.ts**  | Entry point to your express app                                                                                                                               |
 | package.json       | File that contains npm dependencies as well as [build scripts](#what-if-a-library-isnt-on-definitelytyped)                                                    |
 | tsconfig.json      | Config settings for compiling server code written in TypeScript                                                                                               |
 | tslint.json        | Config settings for TSLint code style checking                                                                                                                |
