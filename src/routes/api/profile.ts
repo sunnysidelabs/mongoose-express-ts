@@ -113,7 +113,7 @@ router.post(
 // @route   GET api/profile
 // @desc    Get all profiles
 // @access  Public
-router.get("/", async (_req, res) => {
+router.get("/", async (_req: Request, res: Response) => {
   try {
     const profiles = await Profile.find().populate("user", ["avatar", "email"]);
     res.json(profiles);
@@ -126,7 +126,7 @@ router.get("/", async (_req, res) => {
 // @route   GET api/profile/user/:userId
 // @desc    Get profile by userId
 // @access  Public
-router.get("/user/:userId", async (req, res) => {
+router.get("/user/:userId", async (req: Request, res: Response) => {
   try {
     const profile: IProfile = await Profile.findOne({
       user: req.params.userId

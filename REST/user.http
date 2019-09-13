@@ -2,7 +2,7 @@
 @user = { "email": "hello@email.com", "password": "password"}
 
 ### Register user given their email and password, returns the token upon successful registration
-POST  http://localhost:5000/api/users
+POST  http://localhost:5000/api/user
 content-type: application/json
 
 {{user}}
