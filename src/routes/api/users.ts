@@ -1,14 +1,14 @@
-import bcrypt from 'bcryptjs';
-import config from 'config';
-import { Router, Response } from 'express';
-import { check, validationResult } from 'express-validator/check';
-import gravatar from 'gravatar';
-import HttpStatusCodes from 'http-status-codes';
-import jwt from 'jsonwebtoken';
+import bcrypt from "bcryptjs";
+import config from "config";
+import { Router, Response } from "express";
+import { check, validationResult } from "express-validator/check";
+import gravatar from "gravatar";
+import HttpStatusCodes from "http-status-codes";
+import jwt from "jsonwebtoken";
 
-import Payload from '../../types/Payload';
-import Request from '../../types/Request';
-import User, { IUser } from '../../models/User';
+import Payload from "../../types/Payload";
+import Request from "../../types/Request";
+import User, { IUser } from "../../models/User";
 
 const router: Router = Router();
 
@@ -16,15 +16,20 @@ const router: Router = Router();
 // @desc    Register user given their email and password, returns the token upon successful registration
 // @access  Public
 router.post(
-  '/',
+  "/",
   [
-    check('email', 'Please include a valid email').isEmail(),
-    check('password', 'Please enter a password with 6 or more characters').isLength({ min: 6 })
+    check("email", "Please include a valid email").isEmail(),
+    check(
+      "password",
+      "Please enter a password with 6 or more characters"
+    ).isLength({ min: 6 })
   ],
   async (req: Request, res: Response) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(HttpStatusCodes.BAD_REQUEST).json({ errors: errors.array() });
+      return res
+        .status(HttpStatusCodes.BAD_REQUEST)
+        .json({ errors: errors.array() });
     }
 
     const { email, password } = req.body;
@@ -35,16 +40,16 @@ router.post(
         return res.status(HttpStatusCodes.BAD_REQUEST).json({
           errors: [
             {
-              msg: 'User already exists'
+              msg: "User already exists"
             }
           ]
         });
       }
 
       const options: gravatar.Options = {
-        s: '200',
-        r: 'pg',
-        d: 'mm'
+        s: "200",
+        r: "pg",
+        d: "mm"
       };
 
       const avatar = gravatar.url(email, options);
@@ -67,13 +72,18 @@ router.post(
         userId: user.id
       };
 
-      jwt.sign(payload, config.get('jwtSecret'), { expiresIn: config.get('jwtExpiration') }, (err, token) => {
-        if (err) throw err;
-        res.json({ token });
-      });
+      jwt.sign(
+        payload,
+        config.get("jwtSecret"),
+        { expiresIn: config.get("jwtExpiration") },
+        (err, token) => {
+          if (err) throw err;
+          res.json({ token });
+        }
+      );
     } catch (err) {
       console.error(err.message);
-      res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send('Server Error');
+      res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send("Server Error");
     }
   }
 );

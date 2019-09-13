@@ -1,4 +1,4 @@
-import { Document, Model, model, Schema } from 'mongoose';
+import { Document, Model, model, Schema } from "mongoose";
 
 /**
  * Interface to model the User Schema for TypeScript.
@@ -31,6 +31,6 @@ const userSchema: Schema = new Schema({
   }
 });
 
-const User: Model<IUser> = model('User', userSchema);
+const User: Model<IUser> = model("User", userSchema);
 
 export default User;

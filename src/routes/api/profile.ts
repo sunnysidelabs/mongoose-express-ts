@@ -1,27 +1,27 @@
-import { Router, Response } from 'express';
-import { check, validationResult } from 'express-validator/check';
-import HttpStatusCodes from 'http-status-codes';
+import { Router, Response } from "express";
+import { check, validationResult } from "express-validator/check";
+import HttpStatusCodes from "http-status-codes";
 
-import auth from '../../middleware/auth';
-import Profile, { IProfile } from '../../models/Profile';
-import Request from '../../types/Request';
-import User, { IUser } from '../../models/User';
+import auth from "../../middleware/auth";
+import Profile, { IProfile } from "../../models/Profile";
+import Request from "../../types/Request";
+import User, { IUser } from "../../models/User";
 
 const router: Router = Router();
 
 // @route   GET api/profile/me
 // @desc    Get current user's profile
 // @access  Private
-router.get('/me', auth, async (req: Request, res: Response) => {
+router.get("/me", auth, async (req: Request, res: Response) => {
   try {
     const profile: IProfile = await Profile.findOne({
       user: req.userId
-    }).populate('user', ['avatar', 'email']);
+    }).populate("user", ["avatar", "email"]);
     if (!profile) {
       return res.status(HttpStatusCodes.BAD_REQUEST).json({
         errors: [
           {
-            msg: 'There is no profile for this user'
+            msg: "There is no profile for this user"
           }
         ]
       });
@@ -30,7 +30,7 @@ router.get('/me', auth, async (req: Request, res: Response) => {
     res.json(profile);
   } catch (err) {
     console.error(err.message);
-    res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send('Server Error');
+    res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send("Server Error");
   }
 });
 
@@ -38,18 +38,18 @@ router.get('/me', auth, async (req: Request, res: Response) => {
 // @desc    Create or update user's profile
 // @access  Private
 router.post(
-  '/',
+  "/",
   //@ts-ignore
   [
     auth,
     [
-      check('firstName', 'First Name is required')
+      check("firstName", "First Name is required")
         .not()
         .isEmpty(),
-      check('lastName', 'Last Name is required')
+      check("lastName", "Last Name is required")
         .not()
         .isEmpty(),
-      check('username', 'Username is required')
+      check("username", "Username is required")
         .not()
         .isEmpty()
     ]
@@ -57,7 +57,9 @@ router.post(
   async (req: Request, res: Response) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(HttpStatusCodes.BAD_REQUEST).json({ errors: errors.array() });
+      return res
+        .status(HttpStatusCodes.BAD_REQUEST)
+        .json({ errors: errors.array() });
     }
 
     const { firstName, lastName, username } = req.body;
@@ -77,7 +79,7 @@ router.post(
         return res.status(HttpStatusCodes.BAD_REQUEST).json({
           errors: [
             {
-              msg: 'User not registered'
+              msg: "User not registered"
             }
           ]
         });
@@ -86,7 +88,11 @@ router.post(
       let profile: IProfile = await Profile.findOne({ user: req.userId });
       if (profile) {
         // Update
-        profile = await Profile.findOneAndUpdate({ user: req.userId }, { $set: profileFields }, { new: true });
+        profile = await Profile.findOneAndUpdate(
+          { user: req.userId },
+          { $set: profileFields },
+          { new: true }
+        );
 
         return res.json(profile);
       }
@@ -99,7 +105,7 @@ router.post(
       res.json(profile);
     } catch (err) {
       console.error(err.message);
-      res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send('Server Error');
+      res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send("Server Error");
     }
   }
 );
@@ -107,49 +113,56 @@ router.post(
 // @route   GET api/profile
 // @desc    Get all profiles
 // @access  Public
-router.get('/', async (_req, res) => {
+router.get("/", async (_req, res) => {
   try {
-    const profiles = await Profile.find().populate('user', ['avatar', 'email']);
+    const profiles = await Profile.find().populate("user", ["avatar", "email"]);
     res.json(profiles);
   } catch (err) {
     console.error(err.message);
-    res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send('Server Error');
+    res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send("Server Error");
   }
 });
 
 // @route   GET api/profile/user/:userId
 // @desc    Get profile by userId
 // @access  Public
-router.get('/user/:userId', async (req, res) => {
+router.get("/user/:userId", async (req, res) => {
   try {
-    const profile: IProfile = await Profile.findOne({ user: req.params.userId }).populate('user', ['avatar', 'email']);
+    const profile: IProfile = await Profile.findOne({
+      user: req.params.userId
+    }).populate("user", ["avatar", "email"]);
 
-    if (!profile) return res.status(HttpStatusCodes.BAD_REQUEST).json({ msg: 'Profile not found' });
+    if (!profile)
+      return res
+        .status(HttpStatusCodes.BAD_REQUEST)
+        .json({ msg: "Profile not found" });
 
     res.json(profile);
   } catch (err) {
     console.error(err.message);
-    if (err.kind === 'ObjectId') {
-      return res.status(HttpStatusCodes.BAD_REQUEST).json({ msg: 'Profile not found' });
+    if (err.kind === "ObjectId") {
+      return res
+        .status(HttpStatusCodes.BAD_REQUEST)
+        .json({ msg: "Profile not found" });
     }
-    res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send('Server Error');
+    res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send("Server Error");
   }
 });
 
 // @route   DELETE api/profile
 // @desc    Delete profile and user
 // @access  Private
-router.delete('/', auth, async (req: Request, res: Response) => {
+router.delete("/", auth, async (req: Request, res: Response) => {
   try {
     // Remove profile
     await Profile.findOneAndRemove({ user: req.userId });
     // Remove user
     await User.findOneAndRemove({ _id: req.userId });
 
-    res.json({ msg: 'User removed' });
+    res.json({ msg: "User removed" });
   } catch (err) {
     console.error(err.message);
-    res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send('Server Error');
+    res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send("Server Error");
   }
 });
 
