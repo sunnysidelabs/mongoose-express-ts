@@ -7,12 +7,10 @@ const connectDB = async () => {
     const options: ConnectionOptions = {
       useNewUrlParser: true,
       useCreateIndex: true,
-      useFindAndModify: false
+      useFindAndModify: false,
+      useUnifiedTopology: true,
     };
-    await connect(
-      mongoURI,
-      options
-    );
+    await connect(mongoURI, options);
     console.log("MongoDB Connected...");
   } catch (err) {
     console.error(err.message);

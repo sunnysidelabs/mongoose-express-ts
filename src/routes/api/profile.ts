@@ -15,15 +15,15 @@ const router: Router = Router();
 router.get("/me", auth, async (req: Request, res: Response) => {
   try {
     const profile: IProfile = await Profile.findOne({
-      user: req.userId
+      user: req.userId,
     }).populate("user", ["avatar", "email"]);
     if (!profile) {
       return res.status(HttpStatusCodes.BAD_REQUEST).json({
         errors: [
           {
-            msg: "There is no profile for this user"
-          }
-        ]
+            msg: "There is no profile for this user",
+          },
+        ],
       });
     }
 
@@ -39,20 +39,11 @@ router.get("/me", auth, async (req: Request, res: Response) => {
 // @access  Private
 router.post(
   "/",
-  //@ts-ignore
   [
     auth,
-    [
-      check("firstName", "First Name is required")
-        .not()
-        .isEmpty(),
-      check("lastName", "Last Name is required")
-        .not()
-        .isEmpty(),
-      check("username", "Username is required")
-        .not()
-        .isEmpty()
-    ]
+    check("firstName", "First Name is required").not().isEmpty(),
+    check("lastName", "Last Name is required").not().isEmpty(),
+    check("username", "Username is required").not().isEmpty(),
   ],
   async (req: Request, res: Response) => {
     const errors = validationResult(req);
@@ -69,7 +60,7 @@ router.post(
       user: req.userId,
       firstName,
       lastName,
-      username
+      username,
     };
 
     try {
@@ -79,9 +70,9 @@ router.post(
         return res.status(HttpStatusCodes.BAD_REQUEST).json({
           errors: [
             {
-              msg: "User not registered"
-            }
-          ]
+              msg: "User not registered",
+            },
+          ],
         });
       }
 
@@ -129,7 +120,7 @@ router.get("/", async (_req: Request, res: Response) => {
 router.get("/user/:userId", async (req: Request, res: Response) => {
   try {
     const profile: IProfile = await Profile.findOne({
-      user: req.params.userId
+      user: req.params.userId,
     }).populate("user", ["avatar", "email"]);
 
     if (!profile)
