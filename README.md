@@ -16,8 +16,8 @@ To build and run this app locally you will need a few things:
 
 - Install [Node.js](https://nodejs.org/en/)
 - Install [VS Code](https://code.visualstudio.com/)
-- You need a mongodb server it can be your local or cloud server and put the server credential in config/default.js
-- like for local mongodb server credentialwill be "mongoURI": "mongodb://localhost/profile"`. 
+- You need a mongodb server it can be your local pc or cloud server and put the server credential in config/default.js
+  like for local mongodb server credential will be "mongoURI": "mongodb://localhost/profile"`.
 
 # Getting started
 
