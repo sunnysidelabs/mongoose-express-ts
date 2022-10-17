@@ -1,5 +1,5 @@
 import { Router, Response } from "express";
-import { check, validationResult } from "express-validator/check";
+import { check, validationResult } from "express-validator";
 import HttpStatusCodes from "http-status-codes";
 
 import auth from "../../middleware/auth";
@@ -106,7 +106,10 @@ router.post(
 // @access  Public
 router.get("/", async (_req: Request, res: Response) => {
   try {
-    const profiles = await Profile.find().populate("user", ["avatar", "email"]);
+    const profiles: IProfile[] = await Profile.find().populate("user", [
+      "avatar",
+      "email",
+    ]);
     res.json(profiles);
   } catch (err) {
     console.error(err.message);

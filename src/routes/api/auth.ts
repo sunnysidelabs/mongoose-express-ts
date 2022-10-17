@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import config from "config";
 import { Router, Response } from "express";
-import { check, validationResult } from "express-validator/check";
+import { check, validationResult } from "express-validator";
 import HttpStatusCodes from "http-status-codes";
 import jwt from "jsonwebtoken";
 
@@ -32,7 +32,7 @@ router.post(
   "/",
   [
     check("email", "Please include a valid email").isEmail(),
-    check("password", "Password is required").exists()
+    check("password", "Password is required").exists(),
   ],
   async (req: Request, res: Response) => {
     const errors = validationResult(req);
@@ -50,9 +50,9 @@ router.post(
         return res.status(HttpStatusCodes.BAD_REQUEST).json({
           errors: [
             {
-              msg: "Invalid Credentials"
-            }
-          ]
+              msg: "Invalid Credentials",
+            },
+          ],
         });
       }
 
@@ -62,14 +62,14 @@ router.post(
         return res.status(HttpStatusCodes.BAD_REQUEST).json({
           errors: [
             {
-              msg: "Invalid Credentials"
-            }
-          ]
+              msg: "Invalid Credentials",
+            },
+          ],
         });
       }
 
       const payload: Payload = {
-        userId: user.id
+        userId: user.id,
       };
 
       jwt.sign(

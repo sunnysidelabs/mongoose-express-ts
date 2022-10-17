@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import config from "config";
 import { Router, Response } from "express";
-import { check, validationResult } from "express-validator/check";
+import { check, validationResult } from "express-validator";
 import gravatar from "gravatar";
 import HttpStatusCodes from "http-status-codes";
 import jwt from "jsonwebtoken";
@@ -22,7 +22,7 @@ router.post(
     check(
       "password",
       "Please enter a password with 6 or more characters"
-    ).isLength({ min: 6 })
+    ).isLength({ min: 6 }),
   ],
   async (req: Request, res: Response) => {
     const errors = validationResult(req);
@@ -40,16 +40,16 @@ router.post(
         return res.status(HttpStatusCodes.BAD_REQUEST).json({
           errors: [
             {
-              msg: "User already exists"
-            }
-          ]
+              msg: "User already exists",
+            },
+          ],
         });
       }
 
       const options: gravatar.Options = {
         s: "200",
         r: "pg",
-        d: "mm"
+        d: "mm",
       };
 
       const avatar = gravatar.url(email, options);
@@ -61,7 +61,7 @@ router.post(
       const userFields = {
         email,
         password: hashed,
-        avatar
+        avatar,
       };
 
       user = new User(userFields);
@@ -69,7 +69,7 @@ router.post(
       await user.save();
 
       const payload: Payload = {
-        userId: user.id
+        userId: user.id,
       };
 
       jwt.sign(

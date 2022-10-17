@@ -1,4 +1,4 @@
-import { Document, Model, model, Schema } from "mongoose";
+import { Document, model, Schema } from "mongoose";
 import { IUser } from "./User";
 
 /**
@@ -8,6 +8,7 @@ import { IUser } from "./User";
  * @param lastName:string
  * @param username:string
  */
+
 export interface IProfile extends Document {
   user: IUser["_id"];
   firstName: string;
@@ -18,27 +19,27 @@ export interface IProfile extends Document {
 const profileSchema: Schema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
-    ref: "User"
+    ref: "User",
   },
   firstName: {
     type: String,
-    required: true
+    required: true,
   },
   lastName: {
     type: String,
-    required: true
+    required: true,
   },
   username: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   date: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
-const Profile: Model<IProfile> = model("Profile", profileSchema);
+const Profile = model<IProfile>("Profile", profileSchema);
 
 export default Profile;
