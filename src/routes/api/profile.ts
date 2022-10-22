@@ -3,7 +3,7 @@ import { check, validationResult } from "express-validator";
 import HttpStatusCodes from "http-status-codes";
 
 import auth from "../../middleware/auth";
-import Profile, { IProfile } from "../../models/Profile";
+import Profile, { TProfile, IProfile } from "../../models/Profiles";
 import Request from "../../types/Request";
 import User, { IUser } from "../../models/User";
 
@@ -55,8 +55,8 @@ router.post(
 
     const { firstName, lastName, username } = req.body;
 
-    // Build profile object based on IProfile
-    const profileFields = {
+    // Build profile object based on TProfile
+    const profileFields: TProfile = {
       user: req.userId,
       firstName,
       lastName,
