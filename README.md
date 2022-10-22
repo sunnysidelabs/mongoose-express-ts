@@ -150,8 +150,7 @@ To enhance your development experience while working in VSCode, I provided you w
 - [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
 - [Version Lens](https://marketplace.visualstudio.com/items?itemName=pflannery.vscode-versionlens)
 - [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-- [Bracket Pair Colorizer](https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer)
-- [index-rainbow](https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow)
+- [indent-rainbow](https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow)
 - [Material Icon Theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme)
 
 # Dependencies
