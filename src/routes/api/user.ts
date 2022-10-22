@@ -8,7 +8,7 @@ import jwt from "jsonwebtoken";
 
 import Payload from "../../types/Payload";
 import Request from "../../types/Request";
-import User, { IUser } from "../../models/User";
+import User, { IUser, TUser } from "../../models/User";
 
 const router: Router = Router();
 
@@ -57,8 +57,8 @@ router.post(
       const salt = await bcrypt.genSalt(10);
       const hashed = await bcrypt.hash(password, salt);
 
-      // Build user object based on IUser
-      const userFields = {
+      // Build user object based on TUser
+      const userFields: TUser = {
         email,
         password: hashed,
         avatar,
